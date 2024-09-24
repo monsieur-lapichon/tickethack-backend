@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 /* Schéma */
 const orderSchema = mongoose.Schema({
-    trips: [{ trip: mongoose.Schema.Types.ObjectId, ref: "trips" }],
+    trips: [{ type: mongoose.Schema.Types.ObjectId, ref: "trips" }],
     total: Number,
 });
 
