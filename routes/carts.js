@@ -2,22 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 require('../models/connection')
-const Cart = require('../models/carts')
-const Trip = require('../models/trips')
+const Cart = require('../models/carts');
 
-//créer une fonction TOTALPRICE des trips contenus dans "carts"
-/*function getTotal(){
-    Cart.find()
-      .then(data => {
-        let totalPrice= 0;
-        for (let i=0; i< data.length; i++){
-            totalPrice += data[i].price;
-        }
 
-        return total;
-      })
-}
-*/
 // trips dans le cart avec total price
 router.get('/', (req, res) => {
     Cart.find({isPaid:false})
@@ -91,3 +78,5 @@ router.put('/', (req, res) => {
 
 
 module.exports = router;
+
+
