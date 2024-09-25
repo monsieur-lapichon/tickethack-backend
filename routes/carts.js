@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 require('../models/connection')
-const Cart = require('../models/carts');
-const Order = require('../models/orders')
+const Cart = require('../models/carts')
 const Trip = require('../models/trips')
 
 //créer une fonction TOTALPRICE des trips contenus dans "carts"
@@ -21,14 +20,11 @@ const Trip = require('../models/trips')
 */
 // trips dans le cart avec total price
 router.get('/', (req, res) => {
-    Cart.find()
+    Cart.find({isPaid:false})
         .then(data => {
-            let totalPrice = 0;
-            for (let i = 0; i < data.length; i++) {
-                totalPrice += data[i].price;
-            }
+          
 
-            res.json({ carts: data, total: total })
+            res.json({ carts: data})
         })
 })
 
@@ -61,26 +57,30 @@ router.post('/', (req, res) => {
 
 
 // delete one by Id quand l'utilisateur enlève un trajet avant de purchase
-router.delete('/', (req, res) => {
-    Cart.deleteOne(req.body.id)
-        .then(data => {
-            res.json({ cartsList: data })
+router.delete('/:id', (req, res) => {
+    Cart.deleteOne({_id: req.params.id})
+    .then(data => {
+        console.log
+        res.json({ result: true})})
+           
 
-        });
+        })
+
+
+
+// Update false to true 
+
+
+router.put('/', (req, res) => {
+    Cart.updateMany(
+        { isPaid: false },
+        { isPaid: true }
+
+    )
+    .then(data => {
+        res.json({ cartsList: data })})
+
 });
-
-
-
-
-/*   //  route Delete pour le clic purchase = reset
-// NON! on viendra delete dans le html mais pas dans la bdd 
-   
-router.delete('/', (req, res) => {
-   Cart.deleteMany({})
-   
-   .then(data =>res.json({ cartsList: data })
-)
-  }); */
 
 
 
