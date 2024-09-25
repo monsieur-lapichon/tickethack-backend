@@ -24,12 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-<<<<<<< HEAD
 app.use('/search', searchRouter);
-=======
 app.use('/bookings', bookingsRouter);
 app.use('/carts', cartsRouter);
 
->>>>>>> 05428668dc1c3e1ca69f1b04b0c93088cd2f2f45
 
 module.exports = app;
