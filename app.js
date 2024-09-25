@@ -2,16 +2,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
+const cors = require('cors');
+app.use(cors());
 
 var indexRouter = require('./routes/index');
 var searchRouter = require('./routes/search');
 var bookingsRouter = require('./routes/bookings');
 var cartsRouter = require('./routes/carts');
-
-var app = express();
-
-const cors = require('cors');
-app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
