@@ -6,17 +6,27 @@ var moment = require('moment');
 router.get('/', (req, res) => {
     const { departure, arrival, date } = req.query;
 
-    const formattedDate = moment(date, 'DD/MM/YYYY', true).format('YYYY-MM-DD');
+    const formattedDate = moment(date, 'DD/MM/YYYY', true).startOf('day').toDate();
 
+    Trip.find({
+        departure: departure,
+        arrival: arrival,
+        date: { $gte: formattedDate, $lt: moment(formattedDate).add(1, 'days').toDate() }
+    })
+    .then(trips => {
+        if (trips.length > 0) {
+            const formattedTrips = trips.map(trip => ({
+                departure: trip.departure,
+                arrival: trip.arrival,
+                date: moment(trip.date).format('DD/MM/YYYY'), 
+                price: trip.price
+            }));
 
-    Trip.find({ departure, arrival, date: formattedDate })
-        .then(trips => {
-            if (trips.length > 0) {
-                res.json(trips); 
-            } else {
-                res.json({ message: "Aucun trajet trouvé" }); 
-            }
-        })
+            res.json(formattedTrips); 
+        } else {
+            res.json({ message: "Aucun trajet trouvé" }); 
+        }
+    })
 });
 
 module.exports = router;
