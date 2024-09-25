@@ -4,14 +4,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var searchRouter = require('./routes/search');
 var bookingsRouter = require('./routes/bookings');
 var cartsRouter = require('./routes/carts');
-var searchRouter = require ('./routes/search');
+
+var app = express();
 
 const cors = require('cors');
 app.use(cors());
-
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
