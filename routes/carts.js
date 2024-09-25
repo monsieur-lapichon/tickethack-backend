@@ -41,3 +41,5 @@ router.get('/carts', (req, res) => {
 // créer une route qui envoie les "trips" de "carts" vers "ORDERS" au clic sur "purchase" et vide le cart
 
 //créer une fonction TOTAL montant des trips
+
+module.exports = router;
