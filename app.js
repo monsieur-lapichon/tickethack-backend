@@ -7,10 +7,9 @@ const cors = require('cors');
 app.use(cors());
 
 var indexRouter = require('./routes/index');
+var searchRouter = require('./routes/search');
 var bookingsRouter = require('./routes/bookings');
 var cartsRouter = require('./routes/carts');
-var searchRouter = require ('./routes/search');
-
 
 app.use(logger('dev'));
 app.use(express.json());
