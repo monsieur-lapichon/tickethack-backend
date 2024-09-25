@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 /* Schéma */
-const orderSchema = mongoose.Schema({
+const cartSchema = mongoose.Schema({
     trips: [{ type: mongoose.Schema.Types.ObjectId, ref: "trips" }],
-    total: Number,
 });
 
 /* Modèle */
-const Order = mongoose.model('orders', orderSchema);
+const Cart = mongoose.model('carts', cartSchema);
 
 /* Export */
-module.exports = Order;
+module.exports = Cart;
